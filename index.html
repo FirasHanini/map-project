@@ -25,7 +25,7 @@
         }
 
         // Appel pour ajouter des exemples de commerces
-      fetch('commerce.json') // Remplacez par l'URL de votre fichier JSON
+      fetch('export.geojson') // Remplacez par l'URL de votre fichier JSON
             .then(response => response.json())
             .then(data => {
                 data.forEach(commerce => {
