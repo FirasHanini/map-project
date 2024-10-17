@@ -25,20 +25,20 @@
         }
 
         // Appel pour ajouter des exemples de commerces
-    fetch('export.geojson') // Remplacez par l'URL de votre fichier JSON
-    .then(response => response.json())
-    .then(data => {
-        data.features.forEach(commerce => {
-            // Récupérer les coordonnées et les propriétés
-            const coordinates = commerce.geometry.coordinates;
-            const nom = commerce.properties.nom;
-            const description = commerce.properties.description;
-            const note = commerce.properties.note;
+    fetch('export.geojson') // Utilisez l'URL correcte de votre fichier JSON
+            .then(response => response.json())
+            .then(data => {
+                data.features.forEach(commerce => {
+                    // Récupérer les coordonnées et les propriétés
+                    const coordinates = commerce.geometry.coordinates;
+                    const nom = commerce.properties['name:fr'] || commerce.properties.name || 'Nom inconnu';
+                    const description = commerce.properties.brand || 'Description indisponible';
+                    const note = commerce.properties.shop || 'Non classifié';
 
-            // Ajouter un marqueur pour chaque commerce
-            addMarker(coordinates[1], coordinates[0], nom, description, note);
-        });
-    })
+                    // Ajouter un marqueur pour chaque commerce
+                    addMarker(coordinates[1], coordinates[0], nom, description, note);
+                });
+            })
             .catch(error => console.error("Erreur de chargement des données :", error));
     </script>
 </body>
